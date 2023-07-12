@@ -1,7 +1,10 @@
 ---
 import Layout from '../../layouts/main.astro'
+import * as db from '../../db/db.ts'
 
 const { id } = Astro.params
+
+const contact = await db.getContactById(id)
 ---
 
 <Layout title="Editing">
@@ -13,7 +16,7 @@ const { id } = Astro.params
     hx-boost='true'
     hx-indictaor='#spinner'
   >
-    <legend class='text-xl font-medium tracking-wider'>Add Contact Form</legend>
+    <legend class='text-xl font-medium tracking-wider'>Edit form</legend>
     <div class='flex flex-col'>
       <label for='name' class='flex gap-2 items-center'>
         Name
@@ -29,7 +32,7 @@ const { id } = Astro.params
         class='rounded p-1 border border-slate-500 text-slate-700'
         hx-get='/exists'
         hx-trigger='keyup changed delay:500ms'
-        value={''}
+        value={contact.name || ''}
       />
     </div>
     <div class='flex flex-col'>
@@ -41,7 +44,7 @@ const { id } = Astro.params
         placeholder='Email'
         autocomplete='off'
         class='rounded p-1 border border-slate-500 text-slate-700'
-        value={''}
+        value={contact.email || ''}
       />
     </div>
     <div class='flex flex-col'>
@@ -53,7 +56,7 @@ const { id } = Astro.params
         placeholder='Phone'
         autocomplete='off'
         class='rounded p-1 border border-slate-500 text-slate-700'
-        value={''}
+        value={contact.phone || ''}
       />
     </div>
     <div class='place-self-end mt-10'>
