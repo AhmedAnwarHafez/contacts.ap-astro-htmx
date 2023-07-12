@@ -1,0 +1,73 @@
+---
+import Layout from '../layouts/main.astro'
+---
+
+<Layout title="Add">
+<main class='h-screen flex flex-col align-middle items-center justify-center'>
+  <form
+    class='flex flex-col gap-2'
+    action='/add'
+    method='POST'
+    hx-boost='true'
+    hx-indictaor='#spinner'
+  >
+    <legend class='text-xl font-medium tracking-wider'>Add Contact Form</legend>
+    <div class='flex flex-col'>
+      <label for='name' class='flex gap-2 items-center'>
+        Name
+        <i class='fa-solid fa-check text-green-600'></i>
+      </label>
+      <input
+        type='text'
+        id='name'
+        name='name'
+        placeholder='Name'
+        autocomplete='off'
+        autofocus
+        class='rounded p-1 border border-slate-500 text-slate-700'
+        hx-get='/exists'
+        hx-trigger='keyup changed delay:500ms'
+        value='{{name}}'
+      />
+      <span class='text-red-400'></span>
+    </div>
+    <div class='flex flex-col'>
+      <label for='email'>Email</label>
+      <input
+        type='text'
+        id='email'
+        name='email'
+        placeholder='Email'
+        autocomplete='off'
+        class='rounded p-1 border border-slate-500 text-slate-700'
+        value='{{name}}'
+      />
+      <span class='text-red-400'></span>
+    </div>
+    <div class='flex flex-col'>
+      <label for='phone'>Phone</label>
+      <input
+        type='tel'
+        id='phone'
+        name='phone'
+        placeholder='Phone'
+        autocomplete='off'
+        class='rounded p-1 border border-slate-500 text-slate-700'
+        value='{{phone}}'
+      />
+    </div>
+    <div class='place-self-end mt-10'>
+      <a
+        href='/'
+        class='bg-slate-500 hover:bg-slate-400 text-white font-bold py-2 px-4 rounded'
+      >Back</a>
+      <button
+        class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
+      >
+        <i id='#spinner' class='fa-solid fa-spinner fa-spin htmx-indicator'></i>
+        <span class='mr-2'>Add</span>
+      </button>
+    </div>
+  </form>
+</main>
+</Layout>
