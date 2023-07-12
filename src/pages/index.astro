@@ -4,8 +4,24 @@ import Row from '../components/row.astro'
 import TextBox from '../components/Textbox.astro'
 
 import * as db from '../db/db.ts'
-const contacts = await db.getAllContacts()
+
+let contacts = []
+const url = new URL(Astro.request.url)
+const q = url.searchParams.get('q')
+
+if(Astro.request.headers.get('hx-trigger') === 'search') {
+  contacts = await db.searchContacts(q)
+} else { 
+  
+contacts = await db.getAllContacts()
+}
+
+
 ---
+{Astro.request.headers.get('hx-trigger') === 'search' ? (
+
+      <Row contacts={contacts} />
+) : (
 
 <Layout title={"My contacts"}>
 	<main class='h-screen w-1/2 mx-auto py-4 space-y-4'>
@@ -27,14 +43,17 @@ const contacts = await db.getAllContacts()
         id="search" type="search" name="q" 
         placeholder="Search contacts..."
         hx-get="/"
-        hx-trigger="change, keyup delay:200ms changed"
+        hx-trigger="change, keyup delay:400ms changed"
         hx-target="#contacts"
         hx-push-url="true"
         class="w-full"
+        value={q}
     />
+    {Astro.params.q}
   </div>
   <ul id="contacts" class='bg-slate-700 border border-slate-500 rounded p-2 flex flex-col gap-4'>
       <Row contacts={contacts} />
   </ul>
 </main>
 </Layout>
+)}
