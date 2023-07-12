@@ -10,9 +10,6 @@ const {contacts} = Astro.props
       <span class='text-sm text-gray-300'>{phone}</span>
     </div>
     <div class='flex gap-3 self-center'>
-      <a href={`/edit/${id}`}>
-        <i class='fa-solid fa-pen'></i>
-      </a>
       <button
         hx-delete={`/delete/${id}`}
         hx-push-url='true'
@@ -21,6 +18,9 @@ const {contacts} = Astro.props
       >
         <i class='fa-solid fa-trash'></i>
       </button>
+      <a href={`/edit/${id}`}>
+        <i class='fa-solid fa-pen'></i>
+      </a>
     </div>
   </li>
 		))}
