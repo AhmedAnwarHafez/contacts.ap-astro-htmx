@@ -1,7 +1,34 @@
 ---
 import Layout from '../layouts/main.astro'
+import Row from '../components/row.astro'
+
+import * as db from '../db/db.ts'
+const contacts = await db.getAllContacts()
 ---
 
 <Layout title={"My contacts"}>
-	<h1>My Contacts</h1>
+	<main class='h-screen w-1/2 mx-auto py-4 space-y-4'>
+  <h1 class='text-center text-2xl font-medium tracking-wider'>My Contacts</h1>
+  <div class="flex justify-between">
+    <span hx-get="/total" hx-trigger="revealed">
+      Calculating total...
+    </span>
+    <a href="/add">
+      <div class="flex items-center gap-2 underline">
+        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#f6f5f4}</style><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+        <span>Add Contact</span>
+      </div>
+    </a>
+  </div>
+  <input id="search" type="search" name="q" 
+       hx-get="/"
+       hx-trigger="change, keyup delay:200ms changed"
+       hx-target="#contacts"
+       hx-push-url="true"
+       class="text-slate-700 border border-slate-500 rounded p-2 w-full"
+  />
+  <ul id="contacts" class='bg-slate-700 border border-slate-500 rounded p-2 flex flex-col gap-4'>
+      <Row contacts={contacts} />
+  </ul>
+</main>
 </Layout>
