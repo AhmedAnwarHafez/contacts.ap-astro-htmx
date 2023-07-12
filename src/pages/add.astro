@@ -1,5 +1,17 @@
 ---
 import Layout from '../layouts/main.astro'
+
+import * as db from '../db/db.ts'
+
+if (Astro.request.method === "POST") {
+  const data = await Astro.request.formData();
+  const name = data.get("name");
+  const email = data.get("email");
+  const phone = data.get("phone");
+
+  await db.addContact({ name, email, phone })
+  return Astro.redirect('/')
+}
 ---
 
 <Layout title="Add">
@@ -27,7 +39,6 @@ import Layout from '../layouts/main.astro'
         class='rounded p-1 border border-slate-500 text-slate-700'
         hx-get='/exists'
         hx-trigger='keyup changed delay:500ms'
-        value='{{name}}'
       />
       <span class='text-red-400'></span>
     </div>
@@ -40,7 +51,6 @@ import Layout from '../layouts/main.astro'
         placeholder='Email'
         autocomplete='off'
         class='rounded p-1 border border-slate-500 text-slate-700'
-        value='{{name}}'
       />
       <span class='text-red-400'></span>
     </div>
@@ -53,7 +63,6 @@ import Layout from '../layouts/main.astro'
         placeholder='Phone'
         autocomplete='off'
         class='rounded p-1 border border-slate-500 text-slate-700'
-        value='{{phone}}'
       />
     </div>
     <div class='place-self-end mt-10'>
