@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/main.astro'
 import Row from '../components/row.astro'
+import TextBox from '../components/Textbox.astro'
 
 import * as db from '../db/db.ts'
 const contacts = await db.getAllContacts()
@@ -20,12 +21,13 @@ const contacts = await db.getAllContacts()
       </div>
     </a>
   </div>
-  <input id="search" type="search" name="q" 
-       hx-get="/"
-       hx-trigger="change, keyup delay:200ms changed"
-       hx-target="#contacts"
-       hx-push-url="true"
-       class="text-slate-700 border border-slate-500 rounded p-2 w-full"
+  <TextBox 
+      id="search" type="search" name="q" 
+      hx-get="/"
+      hx-trigger="change, keyup delay:200ms changed"
+      hx-target="#contacts"
+      hx-push-url="true"
+      class="w-full"
   />
   <ul id="contacts" class='bg-slate-700 border border-slate-500 rounded p-2 flex flex-col gap-4'>
       <Row contacts={contacts} />
