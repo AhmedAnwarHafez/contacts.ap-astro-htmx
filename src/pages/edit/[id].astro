@@ -5,12 +5,12 @@ import * as db from '../../db/db.ts'
 
 const { id } = Astro.params
 
-// const contact = await db.getContactById(id)
-const contact = {
-  name: '',
-  email: '',
-  phone: ''
-}
+const contact = await db.getContactById(id)
+// const contact = {
+//   name: '',
+//   email: '',
+//   phone: ''
+// }
 ---
 
 <Layout title="Editing">
