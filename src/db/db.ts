@@ -10,13 +10,14 @@ interface Contact extends ContactDraft {
   id: number;
 }
 
-export async function getTotalContacts() {
-  const [{ total }] = await db("contacts").count("* as total");
-  return total;
+export function getTotalContacts() {
+  return db("contacts")
+    .count("* as total")
+    .then(([{ total }]) => total);
 }
 
-export async function getAllContacts() {
-  return await db("contacts")
+export function getAllContacts() {
+  return db("contacts")
     .select("id", "name", "email", "phone", "created_at")
     .orderBy("created_at", "desc");
 }

@@ -1,0 +1,7 @@
+---
+import * as db from '../db/db.ts'
+
+const length = await db.getTotalContacts()
+---
+
+<span class="text-slate-500">Total Contacts: {length}</span>

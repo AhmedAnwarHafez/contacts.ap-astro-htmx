@@ -1,5 +1,6 @@
 ---
 const {contacts} = Astro.props
+
 ---
 		{contacts.map(({ id, name, email, phone}) => (
 			<li id='row' class='flex justify-between px-2'>
@@ -13,7 +14,7 @@ const {contacts} = Astro.props
         <i class='fa-solid fa-pen'></i>
       </a>
       <button
-        hx-delete={`/${id}`}
+        hx-delete={`/delete/${id}`}
         hx-push-url='true'
         hx-confirm='Are you sure you want to delete this contact?'
         hx-target='body'
