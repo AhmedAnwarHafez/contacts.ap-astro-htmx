@@ -1,0 +1,9 @@
+---
+const { class: className, ...rest} = Astro.props
+---
+
+<input
+  autocomplete='off'
+  class='rounded p-1 border border-slate-500 text-slate-700'
+  {...rest}
+/>

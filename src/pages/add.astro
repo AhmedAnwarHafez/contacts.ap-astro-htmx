@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/main.astro'
+import TextBox from '../components/Textbox.astro'
 
 import * as db from '../db/db.ts'
 
@@ -29,34 +30,30 @@ if (Astro.request.method === "POST") {
         Name
         <i class='fa-solid fa-check text-green-600'></i>
       </label>
-      <input
-        type='text'
+      <TextBox type='text'
         id='name'
         name='name'
         placeholder='Name'
         autocomplete='off'
         autofocus
-        class='rounded p-1 border border-slate-500 text-slate-700'
         hx-get='/exists'
-        hx-trigger='keyup changed delay:500ms'
-      />
+        hx-trigger='keyup changed delay:500ms'  />
       <span class='text-red-400'></span>
     </div>
     <div class='flex flex-col'>
       <label for='email'>Email</label>
-      <input
+      <TextBox
         type='text'
         id='email'
         name='email'
         placeholder='Email'
         autocomplete='off'
-        class='rounded p-1 border border-slate-500 text-slate-700'
       />
       <span class='text-red-400'></span>
     </div>
     <div class='flex flex-col'>
       <label for='phone'>Phone</label>
-      <input
+      <TextBox
         type='tel'
         id='phone'
         name='phone'
