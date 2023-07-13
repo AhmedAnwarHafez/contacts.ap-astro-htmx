@@ -6,19 +6,24 @@ import * as db from '../../db/db.ts'
 const { id } = Astro.params
 
 const contact = await db.getContactById(id)
-// const contact = {
-//   name: '',
-//   email: '',
-//   phone: ''
-// }
+
+if (Astro.request.method === "PUT") {
+  const data = await Astro.request.formData();
+  const name = data.get("name");
+  const email = data.get("email");
+  const phone = data.get("phone");
+
+  await db.updateContact({ name, email, phone })
+  return Astro.redirect(301, '/')
+}
 ---
 
 <Layout title="Editing">
 <main class='relative top-1/2 translate-y-1/2 mx-auto flex flex-col items-center justify-center align-middle'>
   <form
     class='flex flex-col gap-2 w-1/5'
-    action='/add'
-    method='POST'
+    action={`/edit/${id}`}
+    method='PUT'
     hx-boost='true'
     hx-indictaor='#spinner'
   >
