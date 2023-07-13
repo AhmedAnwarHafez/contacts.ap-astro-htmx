@@ -8,13 +8,14 @@ const { id } = Astro.params
 const contact = await db.getContactById(id)
 
 if (Astro.request.method === "PUT") {
+  const id = Astro.params.id;
   const data = await Astro.request.formData();
   const name = data.get("name");
   const email = data.get("email");
   const phone = data.get("phone");
 
-  await db.updateContact({ name, email, phone })
-  return Astro.redirect(301, '/')
+  await db.updateContact({ id, name, email, phone })
+  return Astro.redirect('/', 301)
 }
 ---
 
