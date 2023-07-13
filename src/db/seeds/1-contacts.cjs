@@ -3,7 +3,7 @@ const { faker } = require('@faker-js/faker')
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-exports.seed = async function(knex) {
+exports.seed = async function (knex) {
   await knex('contacts').del()
   faker.seed(123)
   const contacts = []

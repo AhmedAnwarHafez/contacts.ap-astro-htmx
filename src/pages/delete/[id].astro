@@ -1,11 +1,11 @@
 ---
-import * as db from "../../db/db";
+import * as db from '../../db/db'
 
-if (Astro.request.method === "DELETE") {
-  const { id } = Astro.params;
+if (Astro.request.method === 'DELETE') {
+  const { id } = Astro.params
   if (id) {
-    await db.deleteContact(+id);
+    await db.deleteContact(+id)
   }
-  return Astro.redirect("/", 301);
+  return Astro.redirect('/', 301)
 }
 ---

@@ -1,6 +1,6 @@
 ---
 import { twMerge } from 'tailwind-merge'
-const { class: className, ...rest} = Astro.props
+const { class: className, ...rest } = Astro.props
 
 const classes = twMerge(
   'rounded p-1 border border-slate-500 text-slate-50 bg-slate-700 focus:ring-0 focus:outline-none focus:border-slate-200',
@@ -8,8 +8,4 @@ const classes = twMerge(
 )
 ---
 
-<input
-  autocomplete='off'
-  class={classes}
-  {...rest}
-/>
+<input autocomplete="off" class={classes} {...rest} />
